@@ -79,7 +79,7 @@ else
         firewall-cmd --zone=public --add-port=80/tcp --permanent  #cent的防火墙有时候很恶心
 	
 	#cent8 不能直接安装aria2，fedora和cen7却可以。真是醉了。以下是编译安装，安装时长高达半小时。醉了。
-	#wget https://github.com/aria2/aria2/releases/download/release-1.35.0/aria2-1.35.0.tar.gz
+	#wget https://ghproxy.com/https://github.com/aria2/aria2/releases/download/release-1.35.0/aria2-1.35.0.tar.gz
 	#tar -zxvf aria2-1.35.0.tar.gz
 	#cd aria2-1.35.0
 	#yum install gcc* -y
@@ -153,7 +153,7 @@ sudo rm -rf $tmp
 sudo rm -rf $dir/ariang
 sudo rm -rf $dir/downloads
 
-sudo git clone https://github.com/loosink/Aria2Das.git $tmp
+sudo git clone https://ghproxy.com/https://github.com/loosink/Aria2Das.git $tmp
 sudo mkdir -p $dir/ariang 
 sudo mkdir -p $dir/downloads
 sudo unzip $tmp/*.zip -d $dir/ariang
@@ -202,6 +202,7 @@ fi
 
 
 sudo systemctl restart aria2c
+sudo systemctl enable aria2c
 
 ###############################aria2配置文件修改#####################################
 
@@ -243,7 +244,7 @@ echo "程序主体已经安装完成。FileBrowser 如果下载太久可以不�
 echo "在终端中直接输入aria2dash即可进入控制面板，有修改密码等功能"
 if [ $f = "y" ]  ;  then
     #bash $tmp/get-filebrowser.sh #因为最新版有无法编辑文件的bug，所以改了脚本，只装旧版
-    curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
+    curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
     sudo cp $tmp/filebrowser /etc/init.d/
     sudo chmod 755  /etc/init.d/filebrowser
     sudo systemctl daemon-reload
