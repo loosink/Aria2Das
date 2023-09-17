@@ -16,12 +16,13 @@
 
 ![image](https://github.com/loosink/Aria2Das/assets/30341914/5ce80467-b715-4e17-838c-84406f9eac25)
 
+修改后保存，使用`systemctl restart ssh`对ssh服务重启后就可以使用ssh工具远程连接
+
+## ubuntu-22.04.3-live-server-amd64
+
+修改成如图
 
 ![image](https://github.com/loosink/Aria2Das/assets/30341914/7c68d48d-f445-4c72-8181-99ab4475e101)
-
-
-sudo systemctl restart ssh
-
 
 修改后保存，使用`systemctl restart ssh`对ssh服务重启后就可以使用ssh工具远程连接
 
