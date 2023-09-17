@@ -182,7 +182,11 @@ sudo mv /tmp/Aria2Dash/updatetracker.sh /root/.aria2/
 sudo rm -rf ./install.sh
 
 secret="rpc-secret=$p"
-sudo echo $secret >> /root/.aria2/aria2.conf
+
+upload="on-download-complete=/root/aria2upload.sh"
+sudo echo $upload >> /root/.aria2/aria2.conf
+
+#sudo echo $secret >> /root/.aria2/aria2.conf
 
 echo "设置systemctl"
 sudo cp $tmp/aria2c /etc/init.d/
