@@ -1,5 +1,9 @@
 # OneDriveUploader-Modify
 
+## 特别感谢
+
+该项目整合自[Aria2Dash](https://github.com/Masterchiefm/Aria2Dash)以及[OneList](https://github.com/MoeClub/OneList)
+
 # 脚本运行前操作
 
 ## debian-12.1.0
