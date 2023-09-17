@@ -66,29 +66,21 @@ echo "ariang directory is $dir" >> $log
 
 echo "判断系统是debian，Ubuntu，Fedora，cent"
 
-if [[  $(command -v sudo apt)  ]] ; then
-        cmd="sudo apt"
+#!/bin/bash
+if [ -x "$(command -v yum)" ]; then
+    # 如果系统中有yum命令，则使用yum
+   	cmd="sudo yum"
+	$cmd -y install epel-release
+	$cmd -y install aria2
+	apache2="httpd"
+        firewall-cmd --zone=public --add-port=80/tcp --permanent  #cent的防火墙设置
+else [ -x "$(command -v apt)" ]; then
+    # 如果系统中有apt命令，则使用apt
+    	cmd="sudo apt"
 	echo "your system is Ubuntu/Debian"
 	apache2="apache2"
-else
-        cmd="sudo yum"
-	
-	yum -y install epel-release
-	yum -y install aria2
-	apache2="httpd"
-        firewall-cmd --zone=public --add-port=80/tcp --permanent  #cent的防火墙有时候很恶心
-	
-	#cent8 不能直接安装aria2，fedora和cen7却可以。真是醉了。以下是编译安装，安装时长高达半小时。醉了。
-	#wget https://ghproxy.com/https://github.com/aria2/aria2/releases/download/release-1.35.0/aria2-1.35.0.tar.gz
-	#tar -zxvf aria2-1.35.0.tar.gz
-	#cd aria2-1.35.0
-	#yum install gcc* -y
-	#./configure 
-	#make
-	#make install
-	
-
 fi
+
 
 ###############################安装必须的包#################################
 echo "Updatting..."
