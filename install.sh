@@ -189,10 +189,24 @@ sudo echo $upload >> /root/.aria2/aria2.conf
 
 #sudo echo $secret >> /root/.aria2/aria2.conf
 
-echo "设置systemctl"
+#设置systemctl
 sudo cp $tmp/aria2c /etc/init.d/
+sudo cp $tmp/filebrowser /etc/init.d/
 sudo chmod 755  /etc/init.d/aria2c
 sudo systemctl daemon-reload
+sudo systemctl restart aria2c
+sudo systemctl restart filebrowser
+
+#如果使用httpd，注释掉欢迎文件内容，否则需要手动输入才能进入管理页面
+if  [ $apache2 = "httpd" ] ; then
+    sudo sed -i 's/^/#/' /etc/httpd/conf.d/welcome.conf
+    echo "注释成功！"
+    # 重启httpd服务
+    sudo systemctl restart httpd
+    echo "httpd服务已重启！"
+else
+    echo "没有使用httpd，不需要注释welcome.conf"
+fi
 
 if [[  $(command -v apt)  ]] ; then
         sudo update-rc.d aria2c defaults #Ubuntu用这个
@@ -211,23 +225,24 @@ sudo systemctl enable aria2c
 
 ###############################aria2配置文件修改#####################################
 
+#crontab部分暂时放弃，因为有些系统需要手动crontab -e一下才可以生效
 ###############################Crontab设置###############################
-#显示硬盘容量
-	setting="* * * * * bash /root/.aria2/diskusage.sh"
-	
-	echo "${setting}"
-	crontab="/var/spool/cron/crontabs/root"
-	
-	#file指网页显示硬盘容量的html文件
-	file="file=$dir/Disk_Usage.html"
-	
-	touch /root/.aria2/diskusage.sh
-	echo $file > /root/.aria2/diskusage.sh
-	sudo chmod 777 /root/.aria2/diskusage.sh
-	#diskusage.sh里会引用到file，该sh会将执行结果输出到file中
-	cat /tmp/Aria2Dash/diskusage.sh >>  /root/.aria2/diskusage.sh
-	echo "${setting}" >> $crontab
-	systemctl restart cron
+##显示硬盘容量
+#	setting="* * * * * bash /root/.aria2/diskusage.sh"
+#	
+#	echo "${setting}"
+#	crontab="/var/spool/cron/crontabs/root"
+#	
+#	#file指网页显示硬盘容量的html文件
+#	file="file=$dir/Disk_Usage.html"
+#	
+#	touch /root/.aria2/diskusage.sh
+#	echo $file > /root/.aria2/diskusage.sh
+#	sudo chmod 777 /root/.aria2/diskusage.sh
+#	#diskusage.sh里会引用到file，该sh会将执行结果输出到file中
+#	cat /tmp/Aria2Dash/diskusage.sh >>  /root/.aria2/diskusage.sh
+#	echo "${setting}" >> $crontab
+#	systemctl restart cron
 ###############################Crontab设置###############################	
 
 
@@ -249,7 +264,7 @@ echo "程序主体已经安装完成。FileBrowser 如果下载太久可以不�
 echo "在终端中直接输入aria2dash即可进入控制面板，有修改密码等功能"
 if [ $f = "y" ]  ;  then
     #bash $tmp/get-filebrowser.sh #因为最新版有无法编辑文件的bug，所以改了脚本，只装旧版
-    curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
+    curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/loosink/Aria2Das/master/Install/getFileBrowser.sh | bash
     sudo cp $tmp/filebrowser /etc/init.d/
     sudo chmod 755  /etc/init.d/filebrowser
     sudo systemctl daemon-reload
