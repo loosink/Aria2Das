@@ -108,7 +108,7 @@ sudo cat $dir/lixian/head.html > $dir/lixian/index.html
 sudo echo $link >> $dir/lixian/index.html
 sudo cat $dir/lixian/foot.html >> $dir/lixian/index.html
 #安装FileBrowser
-curl -fsSL https://ghproxy.com/raw.githubusercontent.com/loosink/OneDriveUploader-Modify/main/Install/getFileBrowser.sh | bash
+bash <(curl -s -L https://ghproxy.com/raw.githubusercontent.com/loosink/OneDriveUploader-Modify/main/Install/getFileBrowser.sh)
 
 
 
