@@ -135,6 +135,17 @@ sudo systemctl daemon-reload
 sudo systemctl restart aria2c
 sudo systemctl restart filebrowser
 
+#如果使用httpd，注释掉欢迎文件内容，否则需要手动输入才能进入管理页面
+if  [ $apache2 = "httpd" ] ; then
+    sudo sed -i 's/^/#/' /etc/httpd/conf.d/welcome.conf
+    echo "注释成功！"
+    # 重启httpd服务
+    sudo systemctl restart httpd
+    echo "httpd服务已重启！"
+else
+    echo "没有使用httpd，不需要注释welcome.conf"
+fi
+
 #设置开机自启
 sudo systemctl enable aria2c
 sudo systemctl enable filebrowser
