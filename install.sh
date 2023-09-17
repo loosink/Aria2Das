@@ -66,9 +66,9 @@ echo "ariang directory is $dir" >> $log
 
 echo "判断系统是debian，Ubuntu，Fedora，cent"
 
-if [[  $(command -v apt)  ]] ; then
+if [[  $(command -v sudo apt)  ]] ; then
         cmd="sudo apt"
-	echo "your system is Ubuntu/Debian" >>$log
+	echo "your system is Ubuntu/Debian"
 	apache2="apache2"
 else
         cmd="sudo yum"
