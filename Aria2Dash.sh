@@ -4,5 +4,15 @@
 tag_name="$(curl -s https://api.github.com/repos/loosink/Aria2Das/releases/latest | grep -o '"tag_name": ".*"' | sed 's/"//g' | sed 's/tag_name: //g')"
 script_url="https://ghproxy.com/https://github.com/loosink/Aria2Das/releases/download/$tag_name/install.sh"
 echo "the latest script is $script_url"
-sudo apt install curl -y
+
+echo "判断系统是debian，Ubuntu，Fedora，cent"
+
+if [[  $(command -v sudo apt)  ]] ; then
+        cmd="sudo apt"
+	echo "your system is Ubuntu/Debian"
+	apache2="apache2"
+else
+        cmd="sudo yum"
+fi
+$cmd install curl -y
 curl -fsSL $script_url | bash
