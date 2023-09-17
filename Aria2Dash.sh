@@ -14,5 +14,8 @@ if [[  $(command -v sudo apt)  ]] ; then
 else
         cmd="sudo yum"
 fi
+
+echo "使用$cmd进行curl的安装"
+
 $cmd install curl -y
 curl -fsSL $script_url | bash
