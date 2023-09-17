@@ -93,6 +93,7 @@ fi
 ###############################安装必须的包#################################
 echo "Updatting..."
 $cmd update -y
+$cmd install unzip -y
 echo "根据需要，安装Apache2或者httpd"
 if [ $a = "y" ] ; then
 	echo "安装$apache2"
