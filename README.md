@@ -63,7 +63,6 @@ yum install wget curl -y
 
 ```
 bash <(curl -s -L https://ghproxy.com/https://raw.githubusercontent.com/loosink/Aria2Das/master/Aria2Dash.sh)
-
 ```
 
 安装OneDrive Uploader
