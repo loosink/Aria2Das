@@ -184,6 +184,24 @@ upload="on-download-complete=/root/aria2upload.sh"
 sudo echo $upload >> /root/.aria2/aria2.conf
 
 #sudo echo $secret >> /root/.aria2/aria2.conf
+echo "设置systemctl"
+sudo cp $tmp/aria2c /etc/init.d/
+sudo chmod 755  /etc/init.d/aria2c
+sudo systemctl daemon-reload
+
+if [[  $(command -v apt)  ]] ; then
+        sudo update-rc.d aria2c defaults #Ubuntu用这个
+	echo "Ubuntu/Debian"
+else
+        sudo chkconfig aria2c on #Cent OS用这个
+	echo "Cent OS"
+        firewall-cmd --zone=public --add-port=6800/tcp --permanent  #cent的防火墙有时候很恶心
+	systemctl restart firewalld.service
+fi
+
+
+
+sudo systemctl restart aria2c
 
 ###############################安装filebrowser#####################################
 echo "安装FileBrowser,如果国内服务器安装卡在这里，请ctrl + c 退出并参考高级安装，使用 -f n 跳过这一步安装。"
@@ -220,8 +238,6 @@ sudo cp $tmp/aria2c /etc/init.d/
 sudo cp $tmp/filebrowser /etc/init.d/
 sudo chmod 755  /etc/init.d/aria2c
 sudo systemctl daemon-reload
-sudo systemctl restart aria2c
-sudo systemctl restart filebrowser
 
 #如果使用httpd，注释掉欢迎文件内容，否则需要手动输入才能进入管理页面
 if  [ $apache2 = "httpd" ] ; then
@@ -234,19 +250,7 @@ else
     echo "没有使用httpd，不需要注释welcome.conf"
 fi
 
-if [[  $(command -v apt)  ]] ; then
-        sudo update-rc.d aria2c defaults #Ubuntu用这个
-	echo "Ubuntu/Debian"
-else
-        sudo chkconfig aria2c on #Cent OS用这个
-	echo "Cent OS"
-        firewall-cmd --zone=public --add-port=6800/tcp --permanent  #cent的防火墙有时候很恶心
-	systemctl restart firewalld.service
-fi
 
-
-
-sudo systemctl restart aria2c
 sudo systemctl enable aria2c
 sudo systemctl enable $apache2
 
