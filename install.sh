@@ -248,6 +248,7 @@ fi
 
 sudo systemctl restart aria2c
 sudo systemctl enable aria2c
+sudo systemctl enable $apache2
 
 ###############################aria2配置文件修改#####################################
 
