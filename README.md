@@ -82,14 +82,4 @@ wget https://ghproxy.com/https://raw.githubusercontent.com/loosink/Aria2Das/mast
 # FileBrowser
 运行在8080端口，默认账号密码均为admin，初次上线到settings-profile settings里更改密码
 
-# ~~自动更新tracker~~（弃坑，手动更新吧）
-~~首次使用crontab需要先`crontab -e`生成对应文件，粘贴下列代码后保存~~
-
-~~设置每两个小时执行一次tracker更新~~
-
-~~重启后自动更新一次tracker~~
-
-~~0 */2 * * * /bin/sh /root/.aria2/updatetracker.sh~~
-
-~~@reboot /root/.aria2/updatetracker.sh~~
 
