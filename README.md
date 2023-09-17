@@ -1,12 +1,5 @@
 # Aria2Dash: A Convenion Script of Quickly Deploying aria2.
-## About This
-Aria2 is a command-line based multi-thread downloader, which supports http, metalink, Bt and many other download protocals. Most importantly, it can be controled remotely, making it possible for us to use it withou opening ssh client. 
 
-However, its comman-line feature makes it difficult for most people to deploy it. When I want to use Aria on a new server, I had to spend plenty of time to configurate. What a wast of time! So I wrote this script to make it convient for my fist booting a new server.
-[The full English version README is here](https://github.com/Masterchiefm/Aria2Dash/blob/master/README_en.md)
-
-
-[小白请看这里](https://github.com/Masterchiefm/Aria2Dash/blob/master/README_easy.md) |or|[另一个文笔好的教程，什么值得买](https://post.smzdm.com/p/a6lrgdxe/)
 # 一键脚本，设置带Web管理前端的Aria2下载工具
 
 ## 关于此脚本
@@ -16,44 +9,44 @@ Aria2是一个基于命令行的开源下载工具，支持除了ed2k以及迅�
 
 ## 特色
 ```
-1. 整合了[File Browser](https://filebrowser.xyz)的安装，使文件管理无需再通过ftp或者ssh进入服务器中操作。FileBrowser运行端口为8080,后期将考虑设为可修改。
+1. 整合了File Browser的安装，使文件管理无需再通过ftp或者ssh进入服务器中操作。FileBrowser运行端口为8080,后期将考虑设为可修改。
 
 2. 将Aria2c与FileBrowser添加进systemctl，并开机启动。
 
-3. Aria2每次启动的时候会更新tracker，使bt下载更高效。tracker来源[tracker](https://raw.githubusercontent.com/ngosang/trackerslist)
+3. Aria2每次启动的时候会更新tracker，使bt下载更高效。tracker来源[tracker](https://ghproxy.com/https://raw.githubusercontent.com/ngosang/trackerslist)
 
-4. 瞎改了[AriaNg](https://github.com/mayswind/AriaNg)网页管理界面，添加了FileBrowser的入口以管理文件，以及直接进入文件目录的入口。Aria2密钥默认为1234，可在安装时另外指定。输入http://你的ip/ariang  即可访问。
+4. 瞎改了[AriaNg](https://ghproxy.com/https://github.com/mayswind/AriaNg)网页管理界面，添加了FileBrowser的入口以管理文件，以及直接进入文件目录的入口。Aria2密钥默认为1234，可在安装时另外指定。输入http://你的ip/ariang  即可访问。
 
 5. 每分钟刷新硬盘剩余容量,显示在网页根目录Disk_Usage.html中。网页能自动刷新。
 
 6. 新增了控制管理面板
 ```
-如果在某堂下片，建议配合[Aria2py](https://github.com/SuperMore/Aria2Py)使用
+如果在某堂下片，建议配合[Aria2py](https://ghproxy.com/https://github.com/SuperMore/Aria2Py)使用
 
 ## 安装
 
 ### 1. 默认方式安装。
 复制粘贴以下命令到终端，运行执行即可。全部参数采用默认设置。因cent8的源里无aria2，所以不能用。cent7可以，6也行
 ```
-bash <(curl -s -L https://raw.githubusercontent.com/Masterchiefm/Aria2Dash/master/Aria2Dash.sh)
+bash <(curl -s -L https://ghproxy.com/https://raw.githubusercontent.com/loosink/Aria2Das/master/Aria2Dash.sh)
 
 
 假如报错，那是因为没安装curl，可以用下面的
 #报错的话，Ubuntu用这个
-sudo apt install curl -y && bash <(curl -s -L https://github.com/Masterchiefm/Aria2Dash/raw/master/Aria2Dash.sh)
+sudo apt install curl -y && bash <(curl -s -L https://ghproxy.com/https://github.com/loosink/Aria2Das/raw/master/Aria2Dash.sh)
 
 #报错的话，Fedora/cent用这个
-sudo yum install curl -y && bash <(curl -s -L https://github.com/Masterchiefm/Aria2Dash/raw/master/Aria2Dash.sh)
+sudo yum install curl -y && bash <(curl -s -L https://ghproxy.com/https://github.com/loosink/Aria2Das/raw/master/Aria2Dash.sh)
 ```
 
 若安装前已经使用了宝塔面板，则不要用上面的，使用如下的，并将/wwwroot/www.example.com 换为你宝塔面板显示的网站目录。
 ```
 #Ubuntu用这个
-sudo apt install curl -y && bash <(curl -s -L https://github.com/Masterchiefm/Aria2Dash/releases/download/2.2.0/install.sh) -a n -d /wwwroot/www.example.com
+sudo apt install curl -y && bash <(curl -s -L https://ghproxy.com/https://github.com/loosink/Aria2Das/releases/download/2.2.0/install.sh) -a n -d /wwwroot/www.example.com
 ```
 ```
 #Fedora/cent用这个
-sudo yum install curl -y && bash <(curl -s -L https://github.com/Masterchiefm/Aria2Dash/releases/download/2.2.0/install.sh) -a n -d /wwwroot/www.example.com
+sudo yum install curl -y && bash <(curl -s -L https://ghproxy.com/https://github.com/loosink/Aria2Das/releases/download/2.2.0/install.sh) -a n -d /wwwroot/www.example.com
 ```
 
 直接运行命令即可完成安装。后期可通过在命令行中输入 aria2dash  来启动控制管理界面，可在此界面中修改密码等配置。
@@ -67,7 +60,7 @@ sudo yum install curl -y && bash <(curl -s -L https://github.com/Masterchiefm/Ar
 ```
 #!/bin/bash
 sudo apt install curl -y
- bash <(curl -s -L  https://github.com/Masterchiefm/Aria2Dash/raw/master/Aria2Dash.sh)
+ bash <(curl -s -L  https://ghproxy.com/https://github.com/loosink/Aria2Das/raw/master/Aria2Dash.sh)
  # Done！这是Ubuntu的脚本
 ```
 
@@ -75,7 +68,7 @@ sudo apt install curl -y
 ```
 #!/bin/bash
 sudo yum install curl -y
- bash <(curl -s -L  https://github.com/Masterchiefm/Aria2Dash/raw/master/Aria2Dash.sh)
+ bash <(curl -s -L  https://ghproxy.com/https://github.com/loosink/Aria2Das/raw/master/Aria2Dash.sh)
  # Done！这是Fedora/cent的脚本
 ```
 保存后请再次检查服务器套餐设置，并记得勾选上脚本。点击deploy后，等待5分钟即可。
@@ -85,7 +78,7 @@ sudo yum install curl -y
 先下载脚本。
 ```
 #
-wget --no-check-certificate https://github.com/Masterchiefm/Aria2Dash/raw/master/install.sh
+wget --no-check-certificate https://ghproxy.com/https://github.com/loosink/Aria2Das/raw/master/install.sh
 #
 ```
 然后运行。
@@ -131,13 +124,6 @@ sudo systemctl stop aria2
 可以通过FileBrowser对服务器内的文件进行整理。FileBrowser可以删除，上传，分享，修改所有的文件。在浏览器中输入 http://你的ip:8080 即可进入。默认账号密码均为admin
 
 
-## 例子
-[moqiqin.cn/lixian](https://moqiqin.cn/ariang)
-
-其实就是搞个脚本把一些乱七八糟的东西混杂一起，方便使用
-
-# 推荐的服务商
-[搬瓦工](https://bandwagonhost.com/aff.php?aff=63547)
 
 
 [vultr](https://www.vultr.com/?ref=8126287)
