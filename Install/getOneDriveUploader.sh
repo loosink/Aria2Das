@@ -57,7 +57,7 @@ Download_OneDriveUploader()
 	# Download and extract #
 	########################
 
-	echo "Downloading File Browser for $OneDriveUploader_os/$OneDriveUploader_arch..."
+	echo "Downloading OneDrive Uploader for $OneDriveUploader_os/$OneDriveUploader_arch..."
 	if type -p curl >/dev/null 2>&1; then
 		net_getter="curl -fsSL"
 	elif type -p wget >/dev/null 2>&1; then
