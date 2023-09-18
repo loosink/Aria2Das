@@ -22,6 +22,13 @@
 
 修改后保存，使用`systemctl restart ssh`对ssh服务重启后就可以使用ssh工具远程连接
 
+运行脚本前检查 `/etc/apt/sources.list` 中 `cdrom`行是否已经被注释，如果没有被注释掉需要进行注释，否则软件安装过程可能会出错
+
+如图，cdrom行需要被注释掉，否则更新报错
+
+![image](https://github.com/loosink/Aria2Das/assets/30341914/0ecf395a-b74c-4e21-8439-6e12a7a39059)
+
+
 ## ubuntu-22.04.3-live-server-amd64
 
 修改成如图
@@ -29,13 +36,6 @@
 ![image](https://github.com/loosink/Aria2Das/assets/30341914/7c68d48d-f445-4c72-8181-99ab4475e101)
 
 修改后保存，使用`systemctl restart ssh`对ssh服务重启后就可以使用ssh工具远程连接
-
-运行脚本前检查 `/etc/apt/sources.list` 中 `cdrom`行是否已经被注释，如果没有被注释掉需要进行注释，否则软件安装过程可能会出错
-
-如图，cdrom行需要被注释掉，否则更新报错
-
-![image](https://github.com/loosink/Aria2Das/assets/30341914/0ecf395a-b74c-4e21-8439-6e12a7a39059)
-
 
 
 ## CentOS-7-x86_64-Minimal-2009
