@@ -9,8 +9,7 @@
 使用SSH需要先将 `/etc/ssh/sshd_config` 中 `#PermitRootLogin `行 改为 `PermitRootLogin yes`
 并删除`#Port 22`前的注释符号
 
-![image](https://github.com/loosink/Aria2Das/assets/30341914/f9ad690c-77eb-4020-833b-99f493656a0e)
-
+![image](https://github.com/loosink/Aria2Das/assets/30341914/b11e47a1-73d1-4526-b31c-c8f9dcec8329)
 
 
 修改后保存，使用`systemctl restart sshd`对ssh服务重启后就可以使用ssh工具远程连接
