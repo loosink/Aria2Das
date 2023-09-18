@@ -6,13 +6,16 @@
 
 # 目前已经测试过可以使用的系统（含版本）
 
-debian-12.1.0-amd64-DVD-1
 
 ubuntu-22.04.3-live-server-amd64
 
 CentOS-7-x86_64-Minimal-2009 B站使用的版本
 
 CentOS-7-x86_64-DVD-2009
+
+# 测试的其他系统
+
+debian-12.1.0-amd64-DVD-1  重启后不会保存进程，并且重启后丢失tracker
 
 
 # 脚本运行前操作
