@@ -4,6 +4,17 @@
 
 该项目整合自[Aria2Dash](https://github.com/Masterchiefm/Aria2Dash)以及[OneList](https://github.com/MoeClub/OneList)
 
+# 目前已经测试过可以使用的系统（含版本）
+
+debian-12.1.0-amd64-DVD-1
+
+ubuntu-22.04.3-live-server-amd64
+
+CentOS-7-x86_64-Minimal-2009 B站使用的版本
+
+
+
+
 # 脚本运行前操作
 
 使用SSH需要先将 `/etc/ssh/sshd_config` 中 `#PermitRootLogin `行 改为 `PermitRootLogin yes`
