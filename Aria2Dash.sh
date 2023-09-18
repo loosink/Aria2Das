@@ -8,11 +8,11 @@ echo "the latest script is $script_url"
 echo "判断系统是debian，Ubuntu，Fedora，cent"
 
 if command -v apt >/dev/null 2>&1; then
-        cmd="sudo apt"
+        cmd="apt"
 	echo "your system is Ubuntu/Debian"
 	apache2="apache2"
 elif command -v yum >/dev/null 2>&1; then
-        cmd="sudo yum"
+        cmd="yum"
 else
     # 如果系统中没有yum或apt命令
     echo "无法识别Linux包管理器"
