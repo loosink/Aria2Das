@@ -79,6 +79,7 @@ elif command -v apt >/dev/null 2>&1; then
     	cmd="sudo apt"
 	echo "your system is Ubuntu/Debian"
 	apache2="apache2"
+ 	apt-get install sudo -y
 else
     # 如果系统中没有yum或apt命令
     echo "无法识别Linux包管理器"
