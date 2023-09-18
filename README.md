@@ -35,7 +35,7 @@ CentOS-7-x86_64-DVD-2009
 
 # 一键安装
 
-使用前需要先安装curl wget，安装后即可使用
+使用前需要先安装curl wget，安装后即可使用  安装需要使用root用户，因为用sudo不同系统会出不同bug，以后再修
 ```
 apt install wget curl whiptail dialog -y
 ```
