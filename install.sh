@@ -250,6 +250,7 @@ elif [[ $f = "y" && $apache2="httpd" ]]; then
 
     	if [[  $(command -v filebrowser)  ]] ; then
 	    	echo "installed filebrowser" >>$log
+            sudo cp $tmp/filebrowser /etc/init.d/
     	else
 	    	echo "无法安装filebrowser，可能因为国内网络问题无法访问git导致">>$log
     	fi
@@ -262,7 +263,6 @@ fi
 
 #设置systemctl
 sudo cp $tmp/aria2c /etc/init.d/
-sudo cp $tmp/filebrowser /etc/init.d/
 sudo chmod 755  /etc/init.d/aria2c
 sudo systemctl daemon-reload
 
