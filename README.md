@@ -12,7 +12,7 @@ ubuntu-22.04.3-live-server-amd64
 
 CentOS-7-x86_64-Minimal-2009 B站使用的版本
 
-
+CentOS-7-x86_64-DVD-2009
 
 
 # 脚本运行前操作
