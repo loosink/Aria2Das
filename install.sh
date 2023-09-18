@@ -237,7 +237,7 @@ echo "由于centos中filebrowser放行8080端口之后依旧无法使用，所�
 #     echo "not isntall FileBrowser">>$log
 # fi
 
-if [[ $f = "y" && $apache2="apache2" ]]; then
+if  command -v apt >/dev/null 2>&1; then
     #bash $tmp/get-filebrowser.sh #因为最新版有无法编辑文件的bug，所以改了脚本，只装旧版
     curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/loosink/Aria2Das/master/Install/getFileBrowser.sh | bash
     sudo cp $tmp/filebrowser /etc/init.d/
@@ -245,20 +245,21 @@ if [[ $f = "y" && $apache2="apache2" ]]; then
     sudo systemctl daemon-reload
     sudo update-rc.d filebrowser defaults #Ubuntu用这个
     sudo systemctl restart filebrowser
-elif [[ $f = "y" && $apache2="httpd" ]]; then
-	echo "你的系统使用的是yum，所以无法安装filebrowser"
-
-    	if [[  $(command -v filebrowser)  ]] ; then
-	    	echo "installed filebrowser" >>$log
-            sudo cp $tmp/filebrowser /etc/init.d/
-    	else
-	    	echo "无法安装filebrowser，可能因为国内网络问题无法访问git导致">>$log
-    	fi
-   
-    
+elif  command -v yum >/dev/null 2>&1; then
+	  echo "你的系统使用的是yum，所以无法安装filebrowser"
 else
     echo "not isntall FileBrowser">>$log
 fi
+
+if [[  $(command -v filebrowser)  ]] ; then
+	echo "installed filebrowser" >>$log
+    sudo cp $tmp/filebrowser /etc/init.d/
+else
+	echo "无法安装filebrowser，可能因为国内网络问题无法访问git导致">>$log
+fi
+   
+    
+
 ###############################安装filebrowser#####################################
 
 #设置systemctl
