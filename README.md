@@ -37,7 +37,7 @@ CentOS-7-x86_64-DVD-2009
 
 使用前需要先安装curl wget，安装后即可使用
 ```
-apt install wget curl sudo whiptail -y
+apt install wget curl sudo whiptail dialog -y
 ```
 ```
 yum install wget curl -y
