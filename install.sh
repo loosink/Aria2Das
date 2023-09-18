@@ -73,7 +73,7 @@ if command -v yum >/dev/null 2>&1; then
     	$cmd -y install epel-release
 	$cmd -y install aria2
 	apache2="httpd"
-        firewall-cmd --zone=public --add-port=80/tcp --permanent  #cent的防火墙设置
+        firewall-cmd --zone=public --add-port=80/tcp --permanent  #防火墙设置,开通httpd服务所需80端口
 elif command -v apt >/dev/null 2>&1; then
     # 如果系统中有apt命令
     	cmd="sudo apt"
@@ -195,7 +195,7 @@ if [[  $(command -v apt)  ]] ; then
 else
         sudo chkconfig aria2c on #Cent OS用这个
 	echo "Cent OS"
-        firewall-cmd --zone=public --add-port=6800/tcp --permanent  #cent的防火墙有时候很恶心
+        firewall-cmd --zone=public --add-port=6800/tcp --permanent  #防火墙开通aria2c所用的6800端口
 	systemctl restart firewalld.service
 fi
 
