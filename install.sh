@@ -1,6 +1,6 @@
 #/bin/bash
 
-sudo rm -rf ./Aria2Dash.sh
+rm -rf ./Aria2Dash.sh
 cd /
 
 #预设变量
@@ -69,7 +69,7 @@ echo "判断系统是debian，Ubuntu，Fedora，cent"
 
 if command -v yum >/dev/null 2>&1; then
     # 如果系统中有yum命令
-    	cmd="sudo yum"
+    	cmd="yum"
     	$cmd -y install epel-release
 	$cmd -y install aria2
 	apache2="httpd"
@@ -79,7 +79,7 @@ elif command -v apt >/dev/null 2>&1; then
     	cmd="apt"
 	echo "your system is Ubuntu/Debian"
 	apache2="apache2"
- 	#apt-get install sudo -y
+ 	#apt-get install -y
 else
     # 如果系统中没有yum或apt命令
     echo "无法识别Linux包管理器"
@@ -96,7 +96,7 @@ if [ $a = "y" ] ; then
 	echo "安装$apache2"
     cmd1="$cmd install $apache2 -y"
     $cmd1
-    sudo mv $dir/index.html $dir/index.html0
+    mv $dir/index.html $dir/index.html0
     systemctl restart $apache2 
 else  
     echo "you choosed not to install apache2/httpd."
@@ -147,54 +147,54 @@ fi
 ###############################配置网页管理端AriaNG#############################
 echo "下载AriaNg"
 tmp="/tmp/Aria2Dash"
-sudo rm -rf $tmp
-sudo rm -rf $dir/ariang
-sudo rm -rf $dir/downloads
+rm -rf $tmp
+rm -rf $dir/ariang
+rm -rf $dir/downloads
 
-sudo git clone https://ghproxy.com/https://github.com/loosink/Aria2Das.git $tmp
-sudo mkdir -p $dir/ariang 
-sudo mkdir -p $dir/downloads
-sudo unzip $tmp/*.zip -d $dir/ariang
-sudo chmod 777 -R $dir/ariang
+git clone https://ghproxy.com/https://github.com/loosink/Aria2Das.git $tmp
+mkdir -p $dir/ariang 
+mkdir -p $dir/downloads
+unzip $tmp/*.zip -d $dir/ariang
+chmod 777 -R $dir/ariang
 
 echo "正在获取服务器ip，然后填入AriaNg"
 ip=$(curl -s https://ipapi.co/ip)
 echo "你的公网ip是$ip"
 link="<a href="http://$ip:8080" target="blank">"
-sudo cat $dir/ariang/head.html > $dir/ariang/index.html
-sudo echo $link >> $dir/ariang/index.html
-sudo cat $dir/ariang/foot.html >> $dir/ariang/index.html
-sudo echo "$link filebrowser" >> $dir/filebrowser.html
-sudo echo "</a>" >> $dir/filebrowser.html
+cat $dir/ariang/head.html > $dir/ariang/index.html
+echo $link >> $dir/ariang/index.html
+cat $dir/ariang/foot.html >> $dir/ariang/index.html
+echo "$link filebrowser" >> $dir/filebrowser.html
+echo "</a>" >> $dir/filebrowser.html
 ###############################配置网页管理端AriaNG#############################
 
 
 
 ###############################aria2配置文件修改#####################################
 echo "开始配置aria2"
-sudo rm -rf /root/.aria2
-sudo mkdir -p /root/.aria2
-sudo touch /root/.aria2/aria2.session
-sudo mv /tmp/Aria2Dash/aria2.conf /root/.aria2/
-sudo mv /tmp/Aria2Dash/updatetracker.sh /root/.aria2/
-sudo rm -rf ./install.sh
+rm -rf /root/.aria2
+mkdir -p /root/.aria2
+touch /root/.aria2/aria2.session
+mv /tmp/Aria2Dash/aria2.conf /root/.aria2/
+mv /tmp/Aria2Dash/updatetracker.sh /root/.aria2/
+rm -rf ./install.sh
 
 secret="rpc-secret=$p"
 
 upload="on-download-complete=/root/aria2upload.sh"
-sudo echo $upload >> /root/.aria2/aria2.conf
+echo $upload >> /root/.aria2/aria2.conf
 
-#sudo echo $secret >> /root/.aria2/aria2.conf
+#echo $secret >> /root/.aria2/aria2.conf
 echo "设置systemctl"
-sudo cp $tmp/aria2c /etc/init.d/
-sudo chmod 755  /etc/init.d/aria2c
-sudo systemctl daemon-reload
+cp $tmp/aria2c /etc/init.d/
+chmod 755  /etc/init.d/aria2c
+systemctl daemon-reload
 
 if [[  $(command -v apt)  ]] ; then
-        sudo update-rc.d aria2c defaults #Ubuntu用这个
+        update-rc.d aria2c defaults #Ubuntu用这个
 	echo "Ubuntu/Debian"
 else
-        sudo chkconfig aria2c on #Cent OS用这个
+        chkconfig aria2c on #Cent OS用这个
 	echo "Cent OS"
         firewall-cmd --zone=public --add-port=6800/tcp --permanent  #防火墙开通aria2c所用的6800端口
 	systemctl restart firewalld.service
@@ -202,7 +202,7 @@ fi
 
 
 
-sudo systemctl restart aria2c
+systemctl restart aria2c
 
 ###############################安装filebrowser#####################################
 echo "安装FileBrowser,如果国内服务器安装卡在这里，请ctrl + c 退出并参考高级安装，使用 -f n 跳过这一步安装。"
@@ -212,17 +212,17 @@ echo "由于centos中filebrowser放行8080端口之后依旧无法使用，所�
 # if [ $f = "y" ]  ;  then
 #     #bash $tmp/get-filebrowser.sh #因为最新版有无法编辑文件的bug，所以改了脚本，只装旧版
 #     curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/loosink/Aria2Das/master/Install/getFileBrowser.sh | bash
-#     sudo cp $tmp/filebrowser /etc/init.d/
-#     sudo chmod 755  /etc/init.d/filebrowser
-#     sudo systemctl daemon-reload
+#     cp $tmp/filebrowser /etc/init.d/
+#     chmod 755  /etc/init.d/filebrowser
+#     systemctl daemon-reload
 #     	if [[  $(command -v apt)  ]] ; then
-#          sudo update-rc.d filebrowser defaults #Ubuntu用这个
-# 	 sudo systemctl restart filebrowser
+#          update-rc.d filebrowser defaults #Ubuntu用这个
+# 	 systemctl restart filebrowser
   
 # 	else
 # 	firewall-cmd --zone=public --add-port=8080/tcp --permanent
-#         sudo chkconfig filebrowser on #Cent OS用这个
-# 	sudo systemctl restart filebrowser
+#         chkconfig filebrowser on #Cent OS用这个
+# 	systemctl restart filebrowser
 	
  
 # 	fi
@@ -240,11 +240,11 @@ echo "由于centos中filebrowser放行8080端口之后依旧无法使用，所�
 if  command -v apt >/dev/null 2>&1; then
     #bash $tmp/get-filebrowser.sh #因为最新版有无法编辑文件的bug，所以改了脚本，只装旧版
     curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/loosink/Aria2Das/master/Install/getFileBrowser.sh | bash
-    sudo cp $tmp/filebrowser /etc/init.d/
-    sudo chmod 755  /etc/init.d/filebrowser
-    sudo systemctl daemon-reload
-    sudo update-rc.d filebrowser defaults #Ubuntu用这个
-    sudo systemctl restart filebrowser
+    cp $tmp/filebrowser /etc/init.d/
+    chmod 755  /etc/init.d/filebrowser
+    systemctl daemon-reload
+    update-rc.d filebrowser defaults #Ubuntu用这个
+    systemctl restart filebrowser
 elif  command -v yum >/dev/null 2>&1; then
 	  echo "你的系统使用的是yum，所以无法安装filebrowser"
 else
@@ -253,7 +253,7 @@ fi
 
 if [[  $(command -v filebrowser)  ]] ; then
 	echo "installed filebrowser" >>$log
-    sudo cp $tmp/filebrowser /etc/init.d/
+    cp $tmp/filebrowser /etc/init.d/
 else
 	echo "无法安装filebrowser，可能因为国内网络问题无法访问git导致">>$log
 fi
@@ -263,24 +263,24 @@ fi
 ###############################安装filebrowser#####################################
 
 #设置systemctl
-sudo cp $tmp/aria2c /etc/init.d/
-sudo chmod 755  /etc/init.d/aria2c
-sudo systemctl daemon-reload
+cp $tmp/aria2c /etc/init.d/
+chmod 755  /etc/init.d/aria2c
+systemctl daemon-reload
 
 #如果使用httpd，注释掉欢迎文件内容，否则需要手动输入才能进入管理页面
 if  [ $apache2 = "httpd" ] ; then
-    sudo sed -i 's/^/#/' /etc/httpd/conf.d/welcome.conf
+    sed -i 's/^/#/' /etc/httpd/conf.d/welcome.conf
     echo "注释成功！"
     # 重启httpd服务
-    sudo systemctl restart httpd
+    systemctl restart httpd
     echo "httpd服务已重启！"
 else
     echo "没有使用httpd，不需要注释welcome.conf"
 fi
 
 
-sudo systemctl enable aria2c
-sudo systemctl enable $apache2
+systemctl enable aria2c
+systemctl enable $apache2
 
 ###############################aria2配置文件修改#####################################
 
@@ -297,7 +297,7 @@ sudo systemctl enable $apache2
 #	
 #	touch /root/.aria2/diskusage.sh
 #	echo $file > /root/.aria2/diskusage.sh
-#	sudo chmod 777 /root/.aria2/diskusage.sh
+#	chmod 777 /root/.aria2/diskusage.sh
 #	#diskusage.sh里会引用到file，该sh会将执行结果输出到file中
 #	cat /tmp/Aria2Dash/diskusage.sh >>  /root/.aria2/diskusage.sh
 #	echo "${setting}" >> $crontab
@@ -306,14 +306,14 @@ sudo systemctl enable $apache2
 
 
 ###############################控制面版#############################
-sudo rm -rf /etc/aria2dash
-sudo mkdir /etc/aria2dash
+rm -rf /etc/aria2dash
+mkdir /etc/aria2dash
 mv $tmp/aria2dash.py /etc/aria2dash
 mv $tmp/changewwwdir.sh /etc/aria2dash
-sudo echo $dir > /etc/aria2dash/wwwdir
-sudo touch /usr/bin/aria2dash
-sudo echo "python3 /etc/aria2dash/aria2dash.py" > /usr/bin/aria2dash
-sudo chmod 777 /usr/bin/aria2dash
+echo $dir > /etc/aria2dash/wwwdir
+touch /usr/bin/aria2dash
+echo "python3 /etc/aria2dash/aria2dash.py" > /usr/bin/aria2dash
+chmod 777 /usr/bin/aria2dash
 source ~/.bashrc
 ###############################控制面版#############################
 
