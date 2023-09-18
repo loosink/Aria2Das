@@ -237,7 +237,7 @@ echo "由于centos中filebrowser放行8080端口之后依旧无法使用，所�
 #     echo "not isntall FileBrowser">>$log
 # fi
 
-if [[ $f = "y" && && $cmd = "apt" ]]; then
+if [[ $f = "y" && $cmd = "apt" ]]; then
     #bash $tmp/get-filebrowser.sh #因为最新版有无法编辑文件的bug，所以改了脚本，只装旧版
     curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/loosink/Aria2Das/master/Install/getFileBrowser.sh | bash
     sudo cp $tmp/filebrowser /etc/init.d/
@@ -245,7 +245,7 @@ if [[ $f = "y" && && $cmd = "apt" ]]; then
     sudo systemctl daemon-reload
     sudo update-rc.d filebrowser defaults #Ubuntu用这个
     sudo systemctl restart filebrowser
-elif [[ $f = "y" && && $cmd = "yum" ]]; then
+elif [[ $f = "y" && $cmd = "yum" ]]; then
 	echo "你的系统使用的是yum，所以无法安装filebrowser"
 
     	if [[  $(command -v filebrowser)  ]] ; then
