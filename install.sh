@@ -64,7 +64,7 @@ fi
 echo "ariang directory is $dir" >> $log
 
 
-echo "判断系统是debian，Ubuntu，Fedora，cent"
+echo "判断系统是Ubuntu，cent"
 
 
 if command -v yum >/dev/null 2>&1; then
