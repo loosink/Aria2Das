@@ -59,7 +59,7 @@ bash <(curl -s -L https://ghproxy.com/https://raw.githubusercontent.com/loosink/
 
 
 
-# 授权方法以及使用说明、初始化配置文件
+# 授权方法以及使用说明、初始化配置文件（可选）
 [参考wiki](https://github.com/loosink/Aria2Das/blob/master/Install/wiki.md)
 
 
