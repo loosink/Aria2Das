@@ -13,6 +13,8 @@ CentOS-7-x86_64-Minimal-2009 B站使用的版本
 
 CentOS-7-x86_64-DVD-2009
 
+CentOS-8.5.2111-x86_64-dvd1.iso
+
 # 测试的其他系统
 
 debian-12.1.0-amd64-DVD-1  重启后不会保存进程，并且重启后丢失tracker
