@@ -87,6 +87,26 @@ else
 fi
 echo "cmd: $cmd"
 
+# 检查是否为CentOS 7
+if [[ $cmd="yum" && -f /etc/redhat-release ]]; then
+    if grep -q "CentOS Linux release 7" /etc/redhat-release; then
+        echo "当前系统是CentOS 7"
+    fi
+fi
+
+# 检查是否为CentOS 8
+if [[ $cmd="yum" && -f /etc/os-release ]]; then
+    if grep -q "CentOS Linux release 8" /etc/os-release; then
+        echo "当前系统是CentOS 8"
+        #Centos8需要更改repo才可以下载httpd
+        mkdir /etc/yum.repos.d/backup
+        mv *repo /etc/yum.repos.d/bakup/
+        wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-vault-8.5.2111.repo
+        yum makecache
+    fi
+fi
+
+
 ###############################安装必须的包#################################
 echo "Updatting..."
 $cmd update -y
