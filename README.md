@@ -30,13 +30,6 @@ debian-12.1.0-amd64-DVD-1  重启后不会保存进程，并且重启后丢失tr
 
 修改后保存，使用`systemctl restart sshd`对ssh服务重启后就可以使用ssh工具远程连接
 
-**Debian**运行脚本前检查 `/etc/apt/sources.list` 中 `cdrom`行是否已经被注释，如果没有被注释掉需要进行注释，否则软件安装过程可能会出错
-
-如图，cdrom行需要被注释掉，否则更新报错
-
-![image](https://github.com/loosink/Aria2Das/assets/30341914/0ecf395a-b74c-4e21-8439-6e12a7a39059)
-
-
 
 # 一键安装
 
