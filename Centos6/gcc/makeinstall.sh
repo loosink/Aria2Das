@@ -10,8 +10,8 @@ else
     echo "开始编译安装gcc以及aria2c"
     git clone https://ghproxy.com/https://github.com/loosink/Aria2Das.git
     
-    addr=./Aria2/Centos6/step
-    bash $addr/1.sh
+    addr=./Aria2Das/Centos6/step
+    $addr/1.sh
     rm -rf $addr/1.sh
     bash $addr/2.sh
     rm -rf $addr/2.sh
