@@ -1,118 +1,17 @@
 #!/bin/bash
-# install aria2c
+cd   #保证和1~10脚本中工作路径一致，防止出现各种bug
+# 设置URL和脚本文件夹路径
 
-rootdir="/root"
+# 检查aria2c命令是否可执行
+if command -v aria2c &> /dev/null; then
+    echo "aria2c命令可执行，跳过编译安装"
+    exit 0
+else
+    echo "开始编译安装gcc以及aria2c"
+    git clone https://ghproxy.com/https://github.com/loosink/Aria2Das.git
 
-yum install wget curl unzip gcc glibc-devel.i686 glibc-devel gcc-c++ -y
-yum install git -y
-cd $rootdir
-git clone https://ghproxy.com/https://github.com/loosink/Aria2Das.git
-
-#编译安装gmp
-cd $rootdir
-cp $rootdir/Aria2Das/Centos6/gcc/gmp-4.3.2.tar.bz2 $rootdir/
-#wget https://ghproxy.com/https://github.com/loosink/Aria2Das/blob/master/Centos6/gcc/gmp-4.3.2.tar.bz2
-tar -jxf gmp-4.3.2.tar.bz2
-cd gmp-4.3.2
-chmod +x *
-./configure --prefix=/usr/local/gmp
-make && make install
-cd ..
-rm -rf gmp-4.3.2*
-#编译安装mpfr
-cp $rootdir/Aria2Das/Centos6/gcc/mpfr-2.4.2.tar.bz2 $rootdir/
-#wget https://ghproxy.com/https://github.com/loosink/Aria2Das/blob/master/Centos6/gcc/mpfr-2.4.2.tar.bz2
-tar -jxf mpfr-2.4.2.tar.bz2
-cd mpfr-2.4.2
-chmod +x *
-./configure --prefix=/usr/local/mpfr -with-gmp=/usr/local/gmp
-make && make install
-cd $rootdir
-rm -rf mpfr-2.4.2*
-#编译安装mpc
-cp $rootdir/Aria2Das/Centos6/gcc/mpc-0.8.1.tar.gz $rootdir/
-#wget https://ghproxy.com/https://github.com/loosink/Aria2Das/blob/master/Centos6/gcc/mpc-0.8.1.tar.gz
-tar -zxvf mpc-0.8.1.tar.gz
-cd mpc-0.8.1
-chmod +x *
-./configure --prefix=/usr/local/mpc -with-mpfr=/usr/local/mpfr -with-gmp=/usr/local/gmp
-make && make install
-cd $rootdir
-rm -rf mpc-0.8.1*
-
-#编译安装gettext
-cd $rootdir
-wget https://ghproxy.com/https://github.com/loosink/Aria2Das/releases/download/2.2.2/gettext.zip
-unzip gettext-0.21.zip
-cd gettext-0.21
-chmod +x *
-./configure
-make
-make install
-rm -rf /bin/gettext /usr/bin/gettext /usr/bin/gettext.sh /usr/lib64/gettext
-gettext -V
-cd $rootdir
-rm -rf gettext*
-
-#编译安装autoconf
-cp $rootdir/Aria2Das/Centos6/gcc/autoconf-2.71.zip $rootdir/
-#wget https://ghproxy.com/https://github.com/loosink/Aria2Das/blob/master/Centos6/gcc/autoconf-2.71.zip
-unzip autoconf-2.71.zip
-cd autoconf-2.71
-yum install perl* -y
-chmod +x *
-./configure
-make
-make install
-rm -rf /usr/bin/autoreconf
-rm -rf /usr/bin/autoconf
-autoreconf -V
-cd $rootdir
-rm -rf autoconf*
-
-#编译安装gcc4.8.5
-wget https://ghproxy.com/https://github.com/loosink/Aria2Das/releases/download/2.2.2/gcc.tar.bz2
-tar -jxf gcc-4.8.5.tar.bz2
-cd gcc-4.8.5
-chmod +x *
-./contrib/download_prerequisites
-mkdir gcc-build-4.8.5
-cd gcc-build-4.8.5
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/mpc/lib:/usr/local/gmp/lib:/usr/local/mpfr/lib/
-../configure --prefix=/usr/local/gcc --enable-threads=posix --disable-checking --disable-multilib --enable-languages=c,c++ --with-gmp=/usr/local/gmp --with-mpfr=/usr/local/mpfr/ --with-mpc=/usr/local/mpc/
-#../configure -enable-checking=release -enable-languages=c,c++ -disable-multilib
-make
-make install
-cd $rootdir
-rm -rf gcc*
-
-#创建软链接
-mv /usr/bin/c++ /usr/bin/c++.bak
-ln -s /usr/local/gcc/bin/c++ /usr/bin/c++
-mv /usr/bin/g++ /usr/bin/g++.bak
-ln -s /usr/local/gcc/bin/g++ /usr/bin/g++
-mv /usr/bin/gcc /usr/bin/gcc.bak
-ln -s /usr/local/gcc/bin/gcc /usr/bin/gcc
-
-#备份旧版gcc
-#mv /usr/bin/gcc /usr/bin/gcc-4.4.7
-#mv /usr/bin/g++ /usr/bin/g++-4.4.7
-#echo 'export PATH=$PATH:/usr/local/gcc-4.8.5/bin/' | sudo tee -a /etc/profile
-
-#编译安装aria2c
-yum install automake m4 libtool -y
-cp $rootdir/Aria2Das/Centos6/gcc/aria2-1.32.0.zip $rootdir/
-#wget https://ghproxy.com/https://github.com/loosink/Aria2Das/blob/master/Centos6/gcc/aria2-1.32.0.zip
-unzip aria2-1.32.0.zip
-cd aria2-1.32.0
-chmod +x *
-autoreconf -i
-./configure
-make
-make install
-aria2c --version
-cd $rootdir
-rm -rf aria2-1.32.0*
-#删除下载好的文件，节省空间
-cd $rootdir
-rm -rf Aria2Das/
+    for i in {1..10}; do
+        bash "./Aria2Das/Centos6/step/${i}.sh"
+        rm "./Aria2Das/Centos6/step/${i}.sh"
+    done
+fi
