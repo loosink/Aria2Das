@@ -4,6 +4,7 @@
 #yum groupinstall "Development Tools" -y
 yum install wget curl unzip gcc glibc-devel.i686 glibc-devel gcc-c++ -y
 yum install git -y
+cd /root
 git clone https://ghproxy.com/https://github.com/loosink/Aria2Das.git
 
 #编译安装gmp
