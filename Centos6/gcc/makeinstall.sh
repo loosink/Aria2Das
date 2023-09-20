@@ -9,9 +9,26 @@ if command -v aria2c &> /dev/null; then
 else
     echo "开始编译安装gcc以及aria2c"
     git clone https://ghproxy.com/https://github.com/loosink/Aria2Das.git
+    
+    addr=./Aria2/Centos6/step
+    bash $addr/1.sh
+    rm -rf $addr/1.sh
+    bash $addr/2.sh
+    rm -rf $addr/2.sh
+    bash $addr/3.sh
+    rm -rf $addr/3.sh
+    bash $addr/4.sh
+    rm -rf $addr/4.sh
+    bash $addr/5.sh
+    rm -rf $addr/5.sh
+    bash $addr/6.sh
+    rm -rf $addr/6.sh
+    bash $addr/7.sh
+    rm -rf $addr/7.sh
+    bash $addr/8.sh
+    rm -rf $addr/8.sh
+    bash $addr/9.sh
+    rm -rf $addr/9.sh
+    bash $addr/10.sh
 
-    for i in {1..10}; do
-        bash "./Aria2Das/Centos6/step/${i}.sh"
-        rm "./Aria2Das/Centos6/step/${i}.sh"
-    done
 fi
