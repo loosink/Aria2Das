@@ -1,6 +1,7 @@
 #!/bin/bash
 # install aria2c
 yum install wget curl unzip libtool glibc-devel.i686 libstdc++-devel.i686 gcc gcc-c++ -y
+yum groupinstall "Development Tools" -y
 
 #安装依赖包
 cd /root
