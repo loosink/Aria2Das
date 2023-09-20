@@ -3,7 +3,7 @@
 #yum install wget curl unzip libtool glibc-devel.i686 libstdc++-devel.i686 gcc gcc-c++ -y
 #yum groupinstall "Development Tools" -y
 yum install wget curl unzip gcc glibc-devel.i686 glibc-devel gcc-c++ -y
-
+yum install git -y
 git clone https://ghproxy.com/https://github.com/loosink/Aria2Das.git
 
 #编译安装gmp
@@ -113,3 +113,6 @@ make install
 aria2c --version
 cd /root
 rm -rf aria2-1.32.0*
+#删除下载好的文件，节省空间
+cd /root
+rm -rf Aria2Das/
