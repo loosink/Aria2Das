@@ -4,39 +4,44 @@
 #yum groupinstall "Development Tools" -y
 yum install wget curl unzip gcc glibc-devel.i686 glibc-devel gcc-c++ -y
 
+git clone https://ghproxy.com/https://github.com/loosink/Aria2Das.git
+
 #编译安装gmp
 cd /root
-wget https://ghproxy.com/https://github.com/loosink/Aria2Das/blob/master/Centos6/gcc/gmp-4.3.2.tar.bz2
+cp ./Aria2Das/Centos6/gcc/gmp-4.3.2.tar.bz2 ./
+#wget https://ghproxy.com/https://github.com/loosink/Aria2Das/blob/master/Centos6/gcc/gmp-4.3.2.tar.bz2
 tar -jxf gmp-4.3.2.tar.bz2
 cd gmp-4.3.2
 chmod +x *
 ./configure --prefix=/usr/local/gmp
 make && make install
 cd ..
-rm -rf gmp*
+rm -rf gmp-4.3.2*
 #编译安装mpfr
-wget https://ghproxy.com/https://github.com/loosink/Aria2Das/blob/master/Centos6/gcc/mpfr-2.4.2.tar.bz2
+cp ./Aria2Das/Centos6/gcc/mpfr-2.4.2.tar.bz2 ./
+#wget https://ghproxy.com/https://github.com/loosink/Aria2Das/blob/master/Centos6/gcc/mpfr-2.4.2.tar.bz2
 tar -jxf mpfr-2.4.2.tar.bz2
 cd mpfr-2.4.2
 chmod +x *
 ./configure --prefix=/usr/local/mpfr -with-gmp=/usr/local/gmp
 make && make install
 cd ..
-rm -rf mpfr*
+rm -rf mpfr-2.4.2*
 #编译安装mpc
-wget https://ghproxy.com/https://github.com/loosink/Aria2Das/blob/master/Centos6/gcc/mpc-0.8.1.tar.gz
+cp ./Aria2Das/Centos6/gcc/mpc-0.8.1.tar.gz ./
+#wget https://ghproxy.com/https://github.com/loosink/Aria2Das/blob/master/Centos6/gcc/mpc-0.8.1.tar.gz
 tar -zxvf mpc-0.8.1.tar.gz
 cd mpc-0.8.1
 chmod +x *
 ./configure --prefix=/usr/local/mpc -with-mpfr=/usr/local/mpfr -with-gmp=/usr/local/gmp
 make && make install
 cd ..
-rm -rf mpc*
+rm -rf mpc-0.8.1*
 
 #编译安装gettext
 cd /root
-wget https://down.npee.cn/?https://github.com/loosink/Aria2Das/releases/download/2.2.2/gettext.zip
-unzip gettext.zip
+wget https://ghproxy.com/https://github.com/loosink/Aria2Das/releases/download/2.2.2/gettext.zip
+unzip gettext-0.21.zip
 cd gettext-0.21
 chmod +x *
 ./configure
@@ -47,8 +52,9 @@ gettext -V
 cd /root
 rm -rf gettext*
 
-
-wget https://down.npee.cn/?https://github.com/loosink/Aria2Das/blob/master/Centos6/gcc/autoconf-2.71.zip
+#编译安装autoconf
+cp ./Aria2Das/Centos6/gcc/autoconf-2.71.zip ./
+#wget https://ghproxy.com/https://github.com/loosink/Aria2Das/blob/master/Centos6/gcc/autoconf-2.71.zip
 unzip autoconf-2.71.zip
 cd autoconf-2.71
 yum install perl* -y
@@ -63,7 +69,7 @@ cd /root
 rm -rf autoconf*
 
 #编译安装gcc4.8.5
-wget https://down.npee.cn/?https://github.com/loosink/Aria2Das/releases/download/2.2.2/gcc-4.8.5.tar.bz2
+wget https://ghproxy.com/https://github.com/loosink/Aria2Das/releases/download/2.2.2/gcc.tar.bz2
 tar -jxf gcc-4.8.5.tar.bz2
 cd gcc-4.8.5
 chmod +x *
@@ -95,7 +101,8 @@ ln -s /usr/local/gcc/bin/gcc /usr/bin/gcc
 
 #编译安装aria2c
 yum install automake m4 libtool -y
-wget https://down.npee.cn/?https://github.com/loosink/Aria2Das/blob/master/Centos6/gcc/aria2-1.32.0.zip
+cp ./Aria2Das/Centos6/gcc/aria2-1.32.0.zip ./
+#wget https://ghproxy.com/https://github.com/loosink/Aria2Das/blob/master/Centos6/gcc/aria2-1.32.0.zip
 unzip aria2-1.32.0.zip
 cd aria2-1.32.0
 chmod +x *
