@@ -314,7 +314,7 @@ if command -v apt >/dev/null 2>&1; then
     echo "由于centos中filebrowser放行8080端口之后依旧无法使用，所以做了判定，如果系统为centos则不会安装filebrowser"
 
     #bash $tmp/get-filebrowser.sh #因为最新版有无法编辑文件的bug，所以改了脚本，只装旧版
-    curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/loosink/Aria2Das/master/Install/getFileBrowser.sh | bash
+    curl -fsSL https://raw.githubusercontent.com/loosink/Aria2Das/master/Install/getFileBrowser.sh | bash
     cp $tmp/filebrowser /etc/init.d/
     chmod 755 /etc/init.d/filebrowser
     $reloadsystemd
