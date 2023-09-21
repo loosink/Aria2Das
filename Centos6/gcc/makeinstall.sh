@@ -8,27 +8,20 @@ if command -v aria2c &> /dev/null; then
     exit 0
 else
     echo "开始编译安装gcc以及aria2c"
-    git clone https://github.com/loosink/Aria2Das.git
+    rm -rf /root/Aria2Das/
+    git clone https://gitee.com/loosink/Aria2Das.git
     
     addr=./Aria2Das/Centos6/step
+    chmod +x $addr/*
     bash $addr/1.sh
-    rm -rf $addr/1.sh
     bash $addr/2.sh
-    rm -rf $addr/2.sh
     bash $addr/3.sh
-    rm -rf $addr/3.sh
     bash $addr/4.sh
-    rm -rf $addr/4.sh
     bash $addr/5.sh
-    rm -rf $addr/5.sh
     bash $addr/6.sh
-    rm -rf $addr/6.sh
     bash $addr/7.sh
-    rm -rf $addr/7.sh
     bash $addr/8.sh
-    rm -rf $addr/8.sh
     bash $addr/9.sh
-    rm -rf $addr/9.sh
     bash $addr/10.sh
 
 fi
