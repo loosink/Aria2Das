@@ -2,7 +2,7 @@
 #编译安装gcc4.8.5
 yum install gcc-c++ -y
 cd
-curl -O https://ghproxy.com/https://github.com/loosink/Aria2Das/releases/download/2.2.2/gcc.tar.bz2
+curl -O https://gh.api.99988866.xyz/https://github.com/loosink/Aria2Das/releases/download/2.2.2/gcc.tar.bz2
 tar -jxf gcc.tar.bz2
 cd gcc-4.8.5
 chmod +x *
