@@ -365,6 +365,11 @@ if which yum >/dev/null 2>&1; then
         echo "aria2c开机设为自动启动，暂停需要先用which aria2c查找一下"
         echo "然后引用绝对路径进行操作"
         echo "如果没有什么特殊需求就不需要管他"
+        service httpd start
+        iptables -I INPUT -p tcp --dport 6800 -j ACCEPT 
+        iptables -I INPUT -p tcp --dport 80 -j ACCEPT 
+        service iptables save
+        service iptables restart
     fi
 else
     ###############################控制面版#############################
