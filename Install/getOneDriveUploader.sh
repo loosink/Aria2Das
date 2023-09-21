@@ -69,7 +69,7 @@ Download_OneDriveUploader()
 	
 	OneDriveUploader_file="OneDriveUploader_"$OneDriveUploader_arch"_"$OneDriveUploader_os".$OneDriveUploader_dl_ext"
 	OneDriveUploader_tag="$(${net_getter}  https://api.github.com/repos/loosink/Aria2Das/releases/latest | grep -o '"tag_name": ".*"' | sed 's/"//g' | sed 's/tag_name: //g')"
-	OneDriveUploader_url="https://ghproxy.com/https://github.com/loosink/Aria2Das/releases/download/$OneDriveUploader_tag/$OneDriveUploader_file"
+	OneDriveUploader_url="https://github.com/loosink/Aria2Das/releases/download/$OneDriveUploader_tag/$OneDriveUploader_file"
 	echo "$OneDriveUploader_url"
 
 	# Use $PREFIX for compatibility with Termux on Android
