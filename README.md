@@ -34,6 +34,12 @@ Centos6目前还在测试。存在的问题有   1.重启之后需要手动执�
 
 # 一键安装
 
+## 配置Github加速（国内用户）
+```
+sh -c 'sed -i "/# GitHub520 Host Start/Q" /etc/hosts && curl https://raw.hellogithub.com/hosts >> /etc/hosts'
+```
+
+
 使用前需要先安装curl wget，安装后即可使用  安装需要使用root用户，因为用sudo不同系统会出不同bug，以后再修
 ```
 apt install wget curl whiptail dialog -y
