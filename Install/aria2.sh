@@ -87,7 +87,7 @@ $cmd2
 
 tmp="/tmp/Onekey-deploy_aria2"
 sudo rm -rf $tmp
-sudo git clone https://ghproxy.com/https://github.com/loosink/OneDriveUploader-Modify.git $tmp
+sudo git clone https://github.com/loosink/OneDriveUploader-Modify.git $tmp
 sudo rm -rf $dir/lixian
 sudo rm -rf $dir/downloads
 sudo mkdir -p $dir/lixian 
@@ -108,7 +108,7 @@ sudo cat $dir/lixian/head.html > $dir/lixian/index.html
 sudo echo $link >> $dir/lixian/index.html
 sudo cat $dir/lixian/foot.html >> $dir/lixian/index.html
 #安装FileBrowser
-bash <(curl -s -L https://ghproxy.com/raw.githubusercontent.com/loosink/OneDriveUploader-Modify/main/Install/getFileBrowser.sh)
+bash <(curl -s -L https://raw.githubusercontent.com/loosink/Aria2Das/master/Install/getFileBrowser.sh)
 
 
 
