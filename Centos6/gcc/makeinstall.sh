@@ -11,7 +11,7 @@ else
     git clone https://github.com/loosink/Aria2Das.git
     
     addr=./Aria2Das/Centos6/step
-    $addr/1.sh
+    bash $addr/1.sh
     rm -rf $addr/1.sh
     bash $addr/2.sh
     rm -rf $addr/2.sh
