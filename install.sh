@@ -103,7 +103,7 @@ enableapache="$systemctl enable $apache2" #默认用这个自启Apache
 
 install="auto" #这个变量是留给Centos6的，如果是6则该值为manual，执行makeinstall手动编译
 
-restartfirewall="$systemctml restart $firewall"
+restartfirewall="$systemctl restart $firewall"
 # 检查是否为CentOS 6
 if [[ -f /etc/redhat-release ]]; then
     if grep -q "CentOS release 6" /etc/redhat-release; then
@@ -199,7 +199,7 @@ if [ "$install" = "auto" ]; then
 else
     echo "是Centos6系统，采用编译安装的方式"
     echo "时间会很长，安装过程可以去做一些别的事情"
-    curl -fsSL https://ghproxy.com/https://raw.githubusercontent.com/loosink/Aria2Das/master/Centos6/gcc/makeinstall.sh | bash
+    curl -fsSL https://raw.githubusercontent.com/loosink/Aria2Das/master/Centos6/gcc/makeinstall.sh | bash
 fi
 
 if [[ $(command -v aria2c) ]]; then
@@ -216,7 +216,7 @@ rm -rf $tmp
 rm -rf $dir/ariang
 rm -rf $dir/downloads
 
-git clone https://ghproxy.com/https://github.com/loosink/Aria2Das.git $tmp
+git clone https://github.com/loosink/Aria2Das.git $tmp
 mkdir -p $dir/ariang
 mkdir -p $dir/downloads
 unzip $tmp/*.zip -d $dir/ariang
@@ -253,23 +253,43 @@ if [ "$install" = "auto" ]; then
     cp $tmp/aria2c /etc/init.d/
     chmod 755 /etc/init.d/aria2c
     $reloadsystemd
-else
+else #Centos6的配置
     echo "设置systemctl,是Centos6系统"
     cp $tmp/aria2c /etc/init.d/
     chmod +x /etc/init.d/aria2c
-    chkconfig --add /etc/init.d/aria2c
-    chkconfig aria2c on
-    chmod +x /etc/rc.d/rc.local
-    chmod +x /etc/rc.local
-    if grep -q "bash /root/.aria2/updatetracker.sh 
-/usr/local/bin/aria2c --conf-path=/root/.aria2/aria2.conf -D" /etc/rc.local; then
-        echo "命令已存在于/etc/rc.local中"
-    else
-        # 将命令添加到/etc/rc.local文件中
-        echo "bash /root/.aria2/updatetracker.sh 
-/usr/local/bin/aria2c --conf-path=/root/.aria2/aria2.conf -D" >>/etc/rc.local
-        echo "命令已成功添加到/etc/rc.local中"
-    fi
+    # 检测crontab中是否存在指定命令
+    check_crontab() {
+        crontab -l | grep -q "$1"
+        return $?
+    }
+
+    # 添加指定命令到crontab
+    add_to_crontab() {
+        (
+            crontab -l 2>/dev/null
+            echo "$1"
+        ) | crontab -
+    }
+
+    # 检测并添加指定命令到crontab
+    check_and_add_command() {
+        check_crontab "$1"
+        if [ $? -ne 0 ]; then
+            add_to_crontab "$1"
+            echo "已成功添加命令到crontab。"
+        else
+            echo "crontab中已存在指定命令。"
+        fi
+    }
+
+    # 检测并添加第一个命令
+    check_and_add_command "@reboot /bin/bash /root/.aria2/updatetracker.sh"
+
+    # 检测并添加第二个命令
+    check_and_add_command "@reboot /usr/local/bin/aria2c --conf-path=/root/.aria2/aria2.conf -D"
+
+    $systemctl crond restart
+
 fi
 
 if [[ $(command -v apt) ]]; then
