@@ -8,7 +8,7 @@ if command -v aria2c &> /dev/null; then
     exit 0
 else
     echo "开始编译安装gcc以及aria2c"
-    git clone https://ghproxy.com/https://github.com/loosink/Aria2Das.git
+    git clone https://github.com/loosink/Aria2Das.git
     
     addr=./Aria2Das/Centos6/step
     $addr/1.sh
