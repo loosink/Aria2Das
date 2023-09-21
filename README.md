@@ -44,13 +44,13 @@ yum install wget curl -y
 安装aria2服务
 
 ```
-bash <(curl -s -L https://ghproxy.com/https://raw.githubusercontent.com/loosink/Aria2Das/master/Aria2Dash.sh)
+bash <(curl -s -L https://raw.githubusercontent.com/loosink/Aria2Das/master/Aria2Dash.sh)
 ```
 
 安装OneDrive Uploader（可选）
 
 ```
-bash <(curl -s -L https://ghproxy.com/https://raw.githubusercontent.com/loosink/Aria2Das/master/Install/getOneDriveUploader.sh)
+bash <(curl -s -L https://raw.githubusercontent.com/loosink/Aria2Das/master/Install/getOneDriveUploader.sh)
 ```
 
 
@@ -62,7 +62,7 @@ bash <(curl -s -L https://ghproxy.com/https://raw.githubusercontent.com/loosink/
 # 安装自动上传脚本（可选）
 
 ```
-wget https://ghproxy.com/https://raw.githubusercontent.com/loosink/Aria2Das/master/Install/aria2upload.sh -P /root/ && chmod 777 /root/aria2upload.sh && chmod +x /root/aria2upload.sh
+wget https://raw.githubusercontent.com/loosink/Aria2Das/master/Install/aria2upload.sh -P /root/ && chmod 777 /root/aria2upload.sh && chmod +x /root/aria2upload.sh
 ```
 
 # FileBrowser
