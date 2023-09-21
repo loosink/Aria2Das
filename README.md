@@ -19,7 +19,7 @@ CentOS-8.5.2111-x86_64-dvd1.iso
 
 debian-12.1.0-amd64-DVD-1  重启后不会保存进程，并且重启后丢失tracker
 
-Centos6目前还在测试。存在的问题有   1.重启之后需要手动执行`/etc/init.d/aria2c start`，不知道什么原因无法进行开机自启   2.不支持https
+Centos6目前还在测试。存在的问题有   1.不支持https
 
 # 脚本运行前操作
 
