@@ -1,6 +1,6 @@
 #!/bin/bash
 #编译安装gettext
-curl -O https://ghproxy.com/https://github.com/loosink/Aria2Das/releases/download/2.2.2/gettext.zip
+curl -O https://gh.api.99988866.xyz/https://github.com/loosink/Aria2Das/releases/download/2.2.2/gettext.zip
 unzip gettext.zip
 cd gettext-0.21
 chmod +x *
